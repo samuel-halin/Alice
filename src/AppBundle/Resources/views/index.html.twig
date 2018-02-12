@@ -1,0 +1,10 @@
+{% extends '@App/baseBlog.html.twig' %}
+
+{% block posts %}
+    {% for post in listPosts %}
+        <h1>{{ post.title}}</h1>
+        <div class="row">
+            <div class="col-md-12">{{ post.text }}</div>
+        </div>
+    {% endfor %}
+{% endblock %}
