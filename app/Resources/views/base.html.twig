@@ -5,18 +5,36 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel='stylesheet' href='{{ asset('css/bootstrap.min.css') }}'>
-            <link href="{{ asset('css/tuto.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <header class="row">
-        {% block header %}{% endblock %}
+        {% block header %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        Header
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
     </header>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/personalFunctions.js') }}"></script>
+        {% endblock %}
     </body>
     <footer>
-        {% block footer %}{% endblock %}
+        {% block footer %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        Footer
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
     </footer>
 </html>

@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * article
  *
  * @ORM\Table(name="article")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\articleRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
  */
-class article
+class Article
 {
     /**
      * @var int
@@ -41,8 +41,24 @@ class article
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="article")
+     */
+    private $comments;
 
 
+
+    /**
+     * article constructor.
+     * @param $title
+     * @param $content
+     */
+    public function __construct($title,$content)
+    {
+        $this->setDate(new \DateTime('now'));
+        $this->setTitle($title);
+        $this->setContent($content);
+    }
     /**
      * Get id
      *
@@ -124,5 +140,38 @@ class article
     {
         return $this->date;
     }
-}
 
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Article
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+}

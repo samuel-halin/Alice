@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}#}
+    <div class="container">
+        <div class="col-md-10 offset-1">
+            {{ dump(articles) }}
+            {% for article in articles %}
+                <div class="row">
+                    <h1>{{ article.title}}</h1>
+                    <div class="col-md-12">{{ article.content }}</div>
+
+                {% if article.comments.snapshot is not empty %}
+                    <div class="col-md-2 offset-10">{{ article.comments.snapshot|length }} Commentaires.</br><button onclick="toogleShowHide('comments{{ loop.index }}')">Afficher</button></div>
+                    <div class="col-md-12" id="comments{{ loop.index }}">
+                        {% for comment in article.comments.snapshot%}
+                            <div class="row">
+                                <div class="col-md-10 offset-2">{{ comment.content }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+            {% endfor %}
+            {{ render('add') }}
+        </div>
+    </div>
+{% endblock %}
