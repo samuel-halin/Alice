@@ -10,6 +10,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+/**
+ * Class blogPost
+ * @package AppBundle\Entity
+ * @ORM\Table(name="blogPost")
+ */
 class blogPost
 {
     /**
@@ -19,10 +25,6 @@ class blogPost
      */
     protected $id;
     /**
-     * @ORM\Column(name="date", type="date")
-     */
-    protected $date;
-    /**
      * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
@@ -30,6 +32,17 @@ class blogPost
      * @ORM\Column(name="content", type="text")
      */
     protected $content;
+    /**
+     * @ORM\Column(name="date", type="date")
+     */
+    protected $date;
+
+    public function __construct($title,$content)
+    {
+        $this->setDate(new \Datetime());
+        $this->setTitle($title);
+        $this->setContent($content);
+    }
 
     /**
      * @param mixed $title
@@ -37,14 +50,6 @@ class blogPost
     public function setTitle($title)
     {
         $this->title = $title;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
